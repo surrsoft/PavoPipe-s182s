@@ -1,9 +1,19 @@
 /**
+ * Параметры для функции pavoPipeToJson
+ */
+export interface PavoPipeToJsonParams {
+  /** Строка в формате PavoPipe */
+  content: string;
+}
+
+/**
  * Функция для преобразования формата PavoPipe в JSON
- * @param content - строка в формате PavoPipe
+ * @param params - параметры функции
  * @returns массив объектов в формате JSON
  */
-export function pavoPipeToJson(content: string): any[] {
+export function pavoPipeToJson(params: PavoPipeToJsonParams): any[] {
+  const { content } = params;
+  
   // Описания полей
   const descriptions: Record<string, string> = {};
   

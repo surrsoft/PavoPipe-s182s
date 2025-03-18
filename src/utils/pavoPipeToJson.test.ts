@@ -56,7 +56,7 @@ describe('pavoPipeToJson', () => {
       { n: 'bar', foo: 'ещё что-то' }
     ];
 
-    expect(pavoPipeToJson(SIMPLE_K_ITEM_INPUT)).toEqual(expected);
+    expect(pavoPipeToJson({ content: SIMPLE_K_ITEM_INPUT })).toEqual(expected);
   });
 
   test('P02 - должен парсить PavoPipe формат с d-item и k-item', () => {
@@ -67,7 +67,7 @@ describe('pavoPipeToJson', () => {
       { c: 'Москва', f: '1147 год' }
     ];
 
-    expect(pavoPipeToJson(D_ITEM_AND_K_ITEM_INPUT)).toEqual(expected);
+    expect(pavoPipeToJson({ content: D_ITEM_AND_K_ITEM_INPUT })).toEqual(expected);
   });
 
   test('P03 - должен парсить PavoPipe формат с переносами строк между полями', () => {
@@ -78,7 +78,7 @@ describe('pavoPipeToJson', () => {
       { c: 'Москва', f: '1147 год' }
     ];
 
-    expect(pavoPipeToJson(MULTILINE_FIELDS_INPUT)).toEqual(expected);
+    expect(pavoPipeToJson({ content: MULTILINE_FIELDS_INPUT })).toEqual(expected);
   });
 
   test('P04 - должен обрабатывать пустые строки и различные пробельные символы', () => {
@@ -87,7 +87,7 @@ describe('pavoPipeToJson', () => {
       { c: 'Рим', f: '753 год до н.э.' }
     ];
 
-    expect(pavoPipeToJson(EMPTY_LINES_INPUT)).toEqual(expected);
+    expect(pavoPipeToJson({ content: EMPTY_LINES_INPUT })).toEqual(expected);
   });
 
   test('P05 - должен обрабатывать сложные многострочные структуры', () => {
@@ -97,6 +97,6 @@ describe('pavoPipeToJson', () => {
       { name: 'Алексей', age: '40', job: 'Менеджер' }
     ];
 
-    expect(pavoPipeToJson(COMPLEX_MULTILINE_INPUT)).toEqual(expected);
+    expect(pavoPipeToJson({ content: COMPLEX_MULTILINE_INPUT })).toEqual(expected);
   });
 });

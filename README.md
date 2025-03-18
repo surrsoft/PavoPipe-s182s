@@ -92,12 +92,14 @@ const pavoData = `= c название столицы
 - |c Париж |f 3 век до н.э.
 - |c Рим |f 753 год до н.э.`;
 
-const jsonData = pavoPipeToJson(pavoData);
-// Результат:
-// [
-//   { c: 'Париж', f: '3 век до н.э.' },
-//   { c: 'Рим', f: '753 год до н.э.' }
-// ]
+const jsonData = pavoPipeToJson({ content: pavoData });
+console.log(jsonData);
+/*
+[
+  { c: "Париж", f: "3 век до н.э." },
+  { c: "Рим", f: "753 год до н.э." }
+]
+*/
 ```
 
 ### jsonToPavoPipe

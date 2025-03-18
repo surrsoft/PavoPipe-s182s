@@ -46,7 +46,7 @@ describe('J01 - jsonToPavoPipe', () => {
 - |name Иван |age 30 |job Программист
 - |name Мария |age 25 |job Дизайнер`;
   
-      const jsonData = pavoPipeToJson(pavoData);
+      const jsonData = pavoPipeToJson({ content: pavoData });
       const descriptions = {
         name: 'имя',
         age: 'возраст',
