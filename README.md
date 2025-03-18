@@ -81,7 +81,7 @@
 
 ### pavoPipeToJson
 
-Функция `pavoPipeToJson` преобразует строку в формате PavoPipe в массив JSON-объектов:
+Функция `pavoPipeToJson` преобразует строку в формате PavoPipe в объект с описаниями полей и массивом данных:
 
 ```typescript
 import { pavoPipeToJson } from '@/utils';
@@ -92,13 +92,19 @@ const pavoData = `= c название столицы
 - |c Париж |f 3 век до н.э.
 - |c Рим |f 753 год до н.э.`;
 
-const jsonData = pavoPipeToJson({ content: pavoData });
-console.log(jsonData);
+const result = pavoPipeToJson({ content: pavoData });
+console.log(result);
 /*
-[
-  { c: "Париж", f: "3 век до н.э." },
-  { c: "Рим", f: "753 год до н.э." }
-]
+{
+  descriptions: {
+    c: "название столицы",
+    f: "дата основания"
+  },
+  data: [
+    { c: "Париж", f: "3 век до н.э." },
+    { c: "Рим", f: "753 год до н.э." }
+  ]
+}
 */
 ```
 
@@ -127,6 +133,22 @@ const pavoData = jsonToPavoPipe(jsonData, descriptions);
 // - |c Париж |f 3 век до н.э.
 // - |c Рим |f 753 год до н.э.
 //
+```
+
+Также можно использовать результат функции `pavoPipeToJson` напрямую:
+
+```typescript
+import { pavoPipeToJson, jsonToPavoPipe } from '@/utils';
+
+const pavoInput = `= c название столицы
+= f дата основания
+
+- |c Париж |f 3 век до н.э.
+- |c Рим |f 753 год до н.э.`;
+
+const result = pavoPipeToJson({ content: pavoInput });
+const pavoOutput = jsonToPavoPipe(result.data, result.descriptions);
+// pavoOutput будет идентичен pavoInput + '\n'
 ```
 
 Для тестирования этих функций используются Jest и ts-jest. Тесты находятся в файле `src/utils/pavoPipeToJson.test.ts`.
@@ -213,74 +235,3 @@ Error: Hydration failed because the server rendered HTML didn't match the client
 В проекте используется Chakra UI версии 2.8.2, так как версия 3.x несовместима с React 19. При использовании Chakra UI 3.x возникает ошибка:
 
 ```
-TypeError: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$ark$2d$ui$2f$react$2f$dist$2f$components$2f$field$2f$field$2e$anatomy$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.fieldAnatomy.extendWith is not a function
-```
-
-Это связано с тем, что Chakra UI 3.x использует библиотеку @ark-ui/react, в которой метод `fieldAnatomy.extendWith` не работает корректно с React 19.
-
-Решение: использовать Chakra UI версии 2.8.2 вместо 3.x:
-```
-npm install @chakra-ui/react@2.8.2
-```
-
-#### Порт уже используется
-
-Если при запуске проекта возникает ошибка:
-```
-Error: listen EADDRINUSE: address already in use :::22149
-```
-
-Это означает, что порт 22149 уже занят другим процессом. Решения:
-1. Завершить процесс, использующий порт 22149
-2. Изменить порт в package.json на другой
-
-### Оптимизация [[250317002609]]
-
-Проект использует функцию `optimizePackageImports` из Next.js для оптимизации размера бандла Chakra UI. Это позволяет загружать только те компоненты Chakra UI, которые фактически используются в проекте.
-
-Настройка находится в `next.config.ts`:
-
-```typescript
-const config: NextConfig = {
-  experimental: {
-    optimizePackageImports: ["@chakra-ui/react"],
-  },
-};
-```
-
-## Установка пакетов
-
-- ChakraUI (https://chakra-ui.com/docs/get-started/frameworks/next-app)
-  - [x] `npm i @chakra-ui/react`
-  - [x] `npm i @emotion/react`
-  - [x] `npx @chakra-ui/cli snippet add` (это добавит @chakra-ui/cli)
-  - [x] `npm i @chakra-ui/next-js`
-  - [x] `npm i @emotion/styled`
-  - [x] `npm i framer-motion`
-  - [x] `npm i @chakra-ui/icons`
-  - [x] `npm i react-icons --save`
-  - `npm i chakra-react-select`
-- React Query
-  - `npm i @tanstack/react-query`
-  - `npm i -D @tanstack/eslint-plugin-query`
-  - `npm i @tanstack/react-query-devtools`
-- Jest
-  - https://nextjs.org/docs/pages/building-your-application/optimizing/testing#jest-and-react-testing-library
-  - `npm i -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom`
-  - `npm i -D @types/jest`
-  - [x] `npm i -D jest` (для тестирования утилит PavoPipe)
-  - [x] `npm i -D @types/jest` (типы для Jest)
-  - [x] `npm i -D ts-jest` (для тестирования TypeScript кода)
-- Final Form
-  - `npm install --save final-form react-final-form`
-- другое
-  - `npm i sass`
-  - `npm i axios`
-  - `npm i lodash @types/lodash`
-  - `npm i react-hook-form`
-  - `npm i zod`
-  - `npm i next-international`
-  - `npm i path-to-regexp`
-  - [x] `npm i -D eslint-plugin-import` (для автоматической сортировки импортов, см. !asau177!)
-
-

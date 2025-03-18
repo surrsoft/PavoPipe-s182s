@@ -7,18 +7,28 @@ export interface PavoPipeToJsonParams {
 }
 
 /**
+ * Интерфейс результата функции pavoPipeToJson
+ */
+export interface PavoPipeJsonResult {
+  /** Массив объектов с описаниями полей */
+  descriptions: Record<string, string>;
+  /** Массив объектов с данными */
+  data: Record<string, string>[];
+}
+
+/**
  * Функция для преобразования формата PavoPipe в JSON
  * @param params - параметры функции
- * @returns массив объектов в формате JSON
+ * @returns объект с описаниями полей и данными
  */
-export function pavoPipeToJson(params: PavoPipeToJsonParams): any[] {
+export function pavoPipeToJson(params: PavoPipeToJsonParams): PavoPipeJsonResult {
   const { content } = params;
   
   // Описания полей
   const descriptions: Record<string, string> = {};
   
   // Результирующий массив объектов
-  const result: any[] = [];
+  const data: Record<string, string>[] = [];
   
   // Разбиваем контент на строки
   const lines = content.split('\n');
@@ -47,7 +57,7 @@ export function pavoPipeToJson(params: PavoPipeToJsonParams): any[] {
     if (line.startsWith('-')) {
       // Если была предыдущая запись, добавляем её в результат
       if (currentItem) {
-        result.push({ ...currentItem });
+        data.push({ ...currentItem });
       }
       
       // Создаем новую запись
@@ -66,10 +76,13 @@ export function pavoPipeToJson(params: PavoPipeToJsonParams): any[] {
   
   // Добавляем последнюю запись, если она есть
   if (currentItem) {
-    result.push({ ...currentItem });
+    data.push({ ...currentItem });
   }
   
-  return result;
+  return {
+    descriptions,
+    data
+  };
   
   // Вспомогательная функция для обработки полей в строке
   function processFieldsInLine(line: string, item: Record<string, string>) {
