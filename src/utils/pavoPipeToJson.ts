@@ -1,3 +1,5 @@
+import { FieldDesc, FieldName, FieldValue } from "./types";
+
 /**
  * Параметры для функции pavoPipeToJson
  */
@@ -11,9 +13,9 @@ export interface PavoPipeToJsonParams {
  */
 export interface PavoPipeJsonResult {
   /** Массив объектов с описаниями полей */
-  descriptions: Record<string, string>;
+  descriptions: Record<FieldName, FieldDesc>;
   /** Массив объектов с данными */
-  data: Record<string, string>[];
+  data: Record<FieldName, FieldValue>[];
 }
 
 /**
