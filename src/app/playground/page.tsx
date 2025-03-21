@@ -15,12 +15,12 @@ export default function Playground() {
   const toast = useToast();
 
   // ---
-  
+
   const examples = {
     simple: `- |n текст на английском языке |s текст на русском языке
 - |s стол |n table
 - |n bar |foo ещё что-то`,
-    
+
     cities: `= c название столицы
 = f дата основания
 
@@ -28,7 +28,7 @@ export default function Playground() {
 - |c Рим |f 753 год до н.э.
 - |c Лондон |f ок. 47 год н.э.
 - |c Москва |f 1147 год`,
-    
+
     users: `= name имя
 = age возраст
 = job работа
@@ -81,18 +81,18 @@ export default function Playground() {
     <Box maxWidth="1200px" margin="0 auto" padding="4">
       <Heading mb={6}>Playground</Heading>
       <Text mb={4}>Это страница для экспериментов и тестирования компонентов.</Text>
-      
+
+      <Select mb={2} width={400} placeholder="Примеры" onChange={handleExampleSelect}>
+        <option value="simple">Простой пример</option>
+        <option value="cities">Столицы</option>
+        <option value="users">Пользователи</option>
+      </Select>
       <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
         <Box flex="1">
-          <Select mb={2} placeholder="Выберите пример" onChange={handleExampleSelect}>
-            <option value="simple">Простой пример</option>
-            <option value="cities">Столицы</option>
-            <option value="users">Пользователи</option>
-          </Select>
-          
+
           <Box position="relative">
-            <Textarea 
-              placeholder="Введите текст здесь..." 
+            <Textarea
+              placeholder="Введите текст здесь..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               height="400px"
@@ -110,9 +110,9 @@ export default function Playground() {
               <Icon as={CopyIcon} />
             </Button>
           </Box>
-          
-          <Button 
-            colorScheme="blue" 
+
+          <Button
+            colorScheme="blue"
             onClick={handleRun}
             mt={2}
             isDisabled={!inputText}
