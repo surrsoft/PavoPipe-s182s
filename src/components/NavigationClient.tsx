@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Flex, Link, Heading } from '@chakra-ui/react';
+import { Box, Flex, Link, Heading, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 export const NavigationClient = () => {
@@ -14,15 +14,26 @@ export const NavigationClient = () => {
         </Heading>
         
         <Flex gap={6}>
-          <Link as={NextLink} href="/" _hover={{ color: 'blue.300' }}>
-            Главная
-          </Link>
-          <Link as={NextLink} href="/pipeline" _hover={{ color: 'blue.300' }}>
-            Пайплайн
-          </Link>
-          <Link as={NextLink} href="/settings" _hover={{ color: 'blue.300' }}>
-            Настройки
-          </Link>
+          
+          <Menu>
+            <MenuButton as={Button} variant="ghost" color="white" _hover={{ color: 'blue.300' }}>
+              Страницы
+            </MenuButton>
+            <MenuList>
+              <MenuItem as={NextLink} href="/playground" color="gray.800">
+                Playground
+              </MenuItem>
+              <MenuItem as={NextLink} href="/playground-jp" color="gray.800">
+                Playground JP
+              </MenuItem>
+              <MenuItem as={NextLink} href="/settings" color="gray.800">
+                Настройки
+              </MenuItem>
+              <MenuItem as={NextLink} href="/about" color="gray.800">
+                О нас
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       </Flex>
     </Box>
