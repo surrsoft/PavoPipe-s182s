@@ -14,7 +14,13 @@ export default function Home() {
           <HStack spacing={4}>
             <Link href="/playground">
               <Button colorScheme="blue" size="lg">
-                Playground
+                Playground PavoPipe to JSON
+              </Button>
+            </Link>
+
+            <Link href="/playground-jp">
+              <Button colorScheme="blue" size="lg">
+                Playground JSON to PavoPipe
               </Button>
             </Link>
             

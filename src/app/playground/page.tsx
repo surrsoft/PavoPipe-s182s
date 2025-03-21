@@ -1,14 +1,21 @@
 'use client';
 
+import { pavoPipeToJson } from "@/PavoPipe";
 import { Box, Heading, Text, Textarea, Button, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 
+/**
+ * Страница для тестирования преобразования формата PavoPipe в JSON.
+ * Позволяет вводить текст в формате PavoPipe и получать результат в формате JSON.
+ */
 export default function Playground() {
   const [inputText, setInputText] = useState("");
+  const [output, setOutput] = useState("");
 
   const handleRun = () => {
-    console.log("Выполняется код:", inputText);
-    // Здесь можно добавить логику выполнения введенного кода
+    const json = pavoPipeToJson({ content: inputText });
+    const jsonStr = JSON.stringify(json, null, 2);
+    setOutput(jsonStr);
   };
 
   return (
@@ -31,7 +38,12 @@ export default function Playground() {
           alignSelf="flex-start"
         >
           Run
-        </Button>
+        </Button>``
+
+        <Box>
+          <Heading size="md" mb={2}>Результат:</Heading>
+          <pre>{output}</pre>
+        </Box>
       </VStack>
     </Box>
   );

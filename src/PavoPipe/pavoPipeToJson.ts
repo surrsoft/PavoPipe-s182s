@@ -1,21 +1,11 @@
-import { FieldDesc, FieldName, FieldValue } from "./types";
+import { PavoPipeJson } from "./types/PavoPipeJson";
 
 /**
  * Параметры для функции pavoPipeToJson
  */
-export interface PavoPipeToJsonParams {
+export interface Params {
   /** Строка в формате PavoPipe */
   content: string;
-}
-
-/**
- * Интерфейс результата функции pavoPipeToJson
- */
-export interface PavoPipeJsonResult {
-  /** Массив объектов с описаниями полей */
-  descriptions: Record<FieldName, FieldDesc>;
-  /** Массив объектов с данными */
-  data: Record<FieldName, FieldValue>[];
 }
 
 /**
@@ -23,7 +13,7 @@ export interface PavoPipeJsonResult {
  * @param params - параметры функции
  * @returns объект с описаниями полей и данными
  */
-export function pavoPipeToJson(params: PavoPipeToJsonParams): PavoPipeJsonResult {
+export function pavoPipeToJson(params: Params): PavoPipeJson {
   const { content } = params;
   
   // Описания полей

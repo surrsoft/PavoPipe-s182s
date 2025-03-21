@@ -4,11 +4,11 @@
  * @param descriptions - описания полей (опционально)
  * @returns строка в формате PavoPipe
  */
-
 export function jsonToPavoPipe(
   data: Record<string, any>[],
   descriptions?: Record<string, string>
 ): string {
+  console.log('!!-!!-0643 data', {data, t: typeof data, isArray: Array.isArray(data)}); // del+ 
   let result = '';
 
   // Добавляем описания полей, если они предоставлены
@@ -21,6 +21,7 @@ export function jsonToPavoPipe(
 
   // Добавляем данные
   for (const item of data) {
+    console.log('!!-!!-0642 item', item); // del+ 
     result += '- ';
 
     // Добавляем поля
