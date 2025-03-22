@@ -110,7 +110,6 @@ export default function PlaygroundJSONToPavoPipe() {
         try {
             // Парсим JSON
             const jsonData = JSON.parse(jsonInput);
-            console.log('!!-!!-0637 jsonData', jsonData); // del+ 
 
             // Преобразуем в формат PavoPipe
             const pavoPipeResult = jsonToPavoPipe(jsonData);
