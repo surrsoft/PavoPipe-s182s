@@ -126,7 +126,7 @@ export default function Playground() {
           <Box position="relative">
             <Textarea
               value={output}
-              readOnly
+              onChange={(e) => setOutput(e.target.value)}
               height="400px"
               fontFamily="monospace"
             />
