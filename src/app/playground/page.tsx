@@ -47,9 +47,15 @@ export default function Playground() {
 = text текст
 
 - |desc Первая строка
-  Вторая строка
-    Третья строка |text Текст с
-  переносом строк`
+Вторая строка
+  Третья строка |text Текст с
+переносом строк`,
+
+    array: `= b описание
+= f текст
+
+- |b b1 |f f1
+- |b b2 |f f2 |s s1 |f f3`,
   };
 
   const handleExampleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -89,70 +95,81 @@ export default function Playground() {
   return (
     <Box maxWidth="1200px" margin="0 auto" padding="4">
       <Heading mb={6}>Playground</Heading>
-      <Text mb={4}>Это страница для экспериментов и тестирования компонентов.</Text>
-
-      <Select mb={2} width={400} placeholder="Примеры" onChange={handleExampleSelect}>
-        <option value="simple">Пример 1</option>
-        <option value="cities">Пример 2</option>
-        <option value="users">Пример 3</option>
-        <option value="multiline">Пример 4</option>
-      </Select>
-      <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
-        <Box flex="1">
-
-          <Box position="relative">
-            <Textarea
-              placeholder="Введите текст здесь..."
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              height="400px"
-              fontFamily="monospace"
-              resize="vertical"
-            />
-            <Button
-              position="absolute"
-              top={2}
-              right={2}
-              size="sm"
-              onClick={() => copyToClipboard(inputText)}
-              aria-label="Копировать"
-            >
-              <Icon as={CopyIcon} />
-            </Button>
+      <Text mb={4}>Преобразование текста в формате PavoPipe в JSON</Text>
+      <Box mt={8}>
+        <Box
+          display="grid"
+          gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
+          gridTemplateRows={{ base: "auto auto auto auto", md: "auto auto" }}
+          gap={4}
+        >
+          <Box p={4} bg="blue.100" borderRadius="md" gridRow={{ base: "1", md: "1" }}>
+            <Select mb={2} width={400} placeholder="Примеры" onChange={handleExampleSelect}>
+              <option value="simple">Пример 1</option>
+              <option value="cities">Пример 2</option>
+              <option value="users">Пример 3</option>
+              <option value="multiline">Пример 4 переносы строк</option>
+              <option value="array">Пример 5 array</option>
+            </Select>
           </Box>
-
-          <Button
-            colorScheme="blue"
-            onClick={handleRun}
-            mt={2}
-            isDisabled={!inputText}
-          >
-            Run
-          </Button>
-        </Box>
-
-        <Box flex="1">
-          <Heading size="md" mb={2}>Результат:</Heading>
-          <Box position="relative">
-            <Textarea
-              value={output}
-              onChange={(e) => setOutput(e.target.value)}
-              height="400px"
-              fontFamily="monospace"
-            />
-            <Button
-              position="absolute"
-              top={2}
-              right={2}
-              size="sm"
-              onClick={() => copyToClipboard(output)}
-              aria-label="Копировать"
-            >
-              <Icon as={CopyIcon} />
-            </Button>
+          <Box p={4} bg="green.100" borderRadius="md" gridRow={{ base: "3", md: "1" }}>
+            <Heading size="md" mb={2}>Результат:</Heading>
+          </Box>
+          <Box p={4} bg="yellow.100" borderRadius="md" gridRow={{ base: "2", md: "2" }}>
+            <Box position="relative">
+              <Textarea
+                placeholder="Введите текст здесь..."
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                height="400px"
+                fontFamily="monospace"
+                resize="vertical"
+              />
+              <Button
+                position="absolute"
+                top={2}
+                right={2}
+                size="sm"
+                onClick={() => copyToClipboard(inputText)}
+                aria-label="Копировать"
+              >
+                <Icon as={CopyIcon} />
+              </Button>
+            </Box>
+          </Box>
+          <Box p={4} bg="red.100" borderRadius="md">
+            <Box position="relative">
+              <Textarea
+                value={output}
+                onChange={(e) => setOutput(e.target.value)}
+                height="400px"
+                fontFamily="monospace"
+              />
+              <Button
+                position="absolute"
+                top={2}
+                right={2}
+                size="sm"
+                onClick={() => copyToClipboard(output)}
+                aria-label="Копировать"
+              >
+                <Icon as={CopyIcon} />
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Flex>
+      </Box>
+
+      <Box flex="1">
+        <Button
+          colorScheme="blue"
+          onClick={handleRun}
+          mt={2}
+          isDisabled={!inputText}
+        >
+          Run
+        </Button>
+      </Box>
     </Box>
   );
 } 
