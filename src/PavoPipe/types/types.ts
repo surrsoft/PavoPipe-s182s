@@ -6,7 +6,7 @@ export type FieldName = string;
 /**
  * Значение поля (!pp-f-value!)
  */
-export type FieldValue = string;
+export type FieldValue = string | string[];
 
 /**
  * Описание к !pp-f-name! (!pp-f-desc!)

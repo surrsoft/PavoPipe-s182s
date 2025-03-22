@@ -158,4 +158,47 @@ describe('pavoPipeToJson', () => {
     expect(result.data).toEqual(expectedData);
     expect(result.descriptions).toEqual(expectedDescriptions);
   });
+
+
+
+  test('P07 - несколько одинаковых полей должны давать массив', () => {
+    const input = `= b описание
+= f текст
+
+- |b b1 |f f1
+- |b b2 |f f2 |s s1 |f f3`;
+
+    const expectedData = [
+      {
+        b: 'b1',
+        f: 'f1'
+      },
+      {
+        b: 'b2',
+        f: ['f2', 'f3'],
+        s: 's1'
+      }
+    ];
+    
+    const expectedDescriptions = {
+      b: 'описание',
+      f: 'текст'
+    };
+
+    const result = pavoPipeToJson({ content: input });
+    
+    expect(result.data[0].b).toEqual('b1');
+    expect(result.data[0].f).toEqual('f1');
+    expect(result.data[1].b).toEqual('b2');
+    
+    expect(result.data[1].f).toBeInstanceOf(Array);
+    expect(result.data[1].f).toHaveLength(2);
+    expect(result.data[1].f).toContain('f2');
+    expect(result.data[1].f).toContain('f3');
+    
+    expect(result.data[1].s).toEqual('s1');
+
+    expect(result.descriptions.b).toEqual(expectedDescriptions.b);
+    expect(result.descriptions.f).toEqual(expectedDescriptions.f);
+  });
 });

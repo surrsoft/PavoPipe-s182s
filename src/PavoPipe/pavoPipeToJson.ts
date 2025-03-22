@@ -99,7 +99,7 @@ export function pavoPipeToJson(params: Params): PavoPipeObj {
   };
   
   // Вспомогательная функция для обработки полей в строке
-  function processFieldsInLine(line: string, item: Record<string, string>) {
+  function processFieldsInLine(line: string, item: Record<string, string | string[]>) {
     // Ищем все поля в строке (формат: |field_name field_value)
     const fieldRegex = /\|(\S+)\s+([^|]*?)(?=\|\S+\s+|$)/g;
     let match;
@@ -107,14 +107,22 @@ export function pavoPipeToJson(params: Params): PavoPipeObj {
     while ((match = fieldRegex.exec(line + ' '))) {
       const [, fieldName, fieldValue] = match;
       lastFieldName = fieldName;
-      // Если поле уже существует, добавляем перенос строки
+      const value = fieldValue.trim();
+      if (!value) continue;
+
+      // Если поле уже существует
       if (fieldName in item) {
-        const value = fieldValue.trim();
-        if (value) {
-          item[fieldName] += '\n' + value;
+        const existingValue = item[fieldName];
+        if (Array.isArray(existingValue)) {
+          // Если это уже массив, добавляем новое значение
+          existingValue.push(value);
+        } else {
+          // Если это строка, преобразуем в массив с двумя значениями
+          item[fieldName] = [existingValue, value];
         }
       } else {
-        item[fieldName] = fieldValue.trim();
+        // Если поле не существует, создаем новое
+        item[fieldName] = value;
       }
     }
   }
