@@ -129,4 +129,33 @@ describe('pavoPipeToJson', () => {
     expect(result.data).toEqual(expectedData);
     expect(result.descriptions).toEqual(expectedDescriptions);
   });
+
+  test('P06 - должен поддерживать переносы строк в значениях полей', () => {
+    const input = `= desc описание
+= text текст
+
+- |desc Первая строка
+  Вторая строка
+    Третья строка |text Текст с
+  переносом строк`;
+
+    const expectedData = [
+      {
+        desc: `Первая строка
+  Вторая строка
+    Третья строка`,
+        text: `Текст с
+  переносом строк`
+      }
+    ];
+    
+    const expectedDescriptions = {
+      desc: 'описание',
+      text: 'текст'
+    };
+
+    const result = pavoPipeToJson({ content: input });
+    expect(result.data).toEqual(expectedData);
+    expect(result.descriptions).toEqual(expectedDescriptions);
+  });
 });

@@ -16,6 +16,7 @@ export default function Playground() {
 
   // ---
 
+  // сущность !!s191s!!
   const examples = {
     simple: `- |n текст на английском языке |s текст на русском языке
 - |s стол |n table
@@ -40,7 +41,15 @@ export default function Playground() {
   |age 25
   |job Дизайнер
 - |name Алексей |age 40
-  |job Менеджер`
+  |job Менеджер`,
+
+    multiline: `= desc описание
+= text текст
+
+- |desc Первая строка
+  Вторая строка
+    Третья строка |text Текст с
+  переносом строк`
   };
 
   const handleExampleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -86,6 +95,7 @@ export default function Playground() {
         <option value="simple">Пример 1</option>
         <option value="cities">Пример 2</option>
         <option value="users">Пример 3</option>
+        <option value="multiline">Пример 4</option>
       </Select>
       <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
         <Box flex="1">
