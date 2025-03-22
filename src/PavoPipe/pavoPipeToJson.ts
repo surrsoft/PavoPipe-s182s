@@ -1,10 +1,10 @@
-import { PavoPipeJson } from "./types/PavoPipeJson";
+import { PavoPipeObj } from "./types/PavoPipeJson";
 
 /**
  * Параметры для функции pavoPipeToJson
  */
 export interface Params {
-  /** Строка в формате PavoPipe */
+  /** !pp-content! */
   content: string;
 }
 
@@ -13,7 +13,7 @@ export interface Params {
  * @param params - параметры функции
  * @returns объект с описаниями полей и данными
  */
-export function pavoPipeToJson(params: Params): PavoPipeJson {
+export function pavoPipeToJson(params: Params): PavoPipeObj {
   const { content } = params;
   
   // Описания полей
