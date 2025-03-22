@@ -83,9 +83,9 @@ export default function Playground() {
       <Text mb={4}>Это страница для экспериментов и тестирования компонентов.</Text>
 
       <Select mb={2} width={400} placeholder="Примеры" onChange={handleExampleSelect}>
-        <option value="simple">Простой пример</option>
-        <option value="cities">Столицы</option>
-        <option value="users">Пользователи</option>
+        <option value="simple">Пример 1</option>
+        <option value="cities">Пример 2</option>
+        <option value="users">Пример 3</option>
       </Select>
       <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
         <Box flex="1">
