@@ -23,38 +23,18 @@ export const NavigationClient = () => {
             <MenuButton as={Button} variant="ghost" color="white" _hover={{ color: 'blue.300' }}>
               Страницы
             </MenuButton>
-            <MenuList>
-              <MenuItem 
-                as={NextLink} 
-                href="/playground" 
-                color={isActive('/playground') ? 'blue.500' : 'gray.800'}
-                bg={isActive('/playground') ? 'gray.100' : 'transparent'}
-              >
-                Playground
+            <MenuList bg="gray.700">
+              <MenuItem as={NextLink} href="/playground" bg="gray.700" _hover={{ bg: 'gray.600' }}>
+                PavoPipe to JSON
               </MenuItem>
-              <MenuItem 
-                as={NextLink} 
-                href="/playground-jp" 
-                color={isActive('/playground-jp') ? 'blue.500' : 'gray.800'}
-                bg={isActive('/playground-jp') ? 'gray.100' : 'transparent'}
-              >
-                Playground JP
+              <MenuItem as={NextLink} href="/playground-jp" bg="gray.700" _hover={{ bg: 'gray.600' }}>
+                JSON to PavoPipe
               </MenuItem>
-              <MenuItem 
-                as={NextLink} 
-                href="/settings" 
-                color={isActive('/settings') ? 'blue.500' : 'gray.800'}
-                bg={isActive('/settings') ? 'gray.100' : 'transparent'}
-              >
-                Настройки
+              <MenuItem as={NextLink} href="/chakra-playground" bg="gray.700" _hover={{ bg: 'gray.600' }}>
+                Chakra UI Demo
               </MenuItem>
-              <MenuItem 
-                as={NextLink} 
-                href="/about" 
-                color={isActive('/about') ? 'blue.500' : 'gray.800'}
-                bg={isActive('/about') ? 'gray.100' : 'transparent'}
-              >
-                О нас
+              <MenuItem as={NextLink} href="/about" bg="gray.700" _hover={{ bg: 'gray.600' }}>
+                О проекте
               </MenuItem>
             </MenuList>
           </Menu>
