@@ -14,14 +14,23 @@ import {
   Badge,
   Divider,
   Alert,
-  AlertIcon
+  AlertIcon,
+  chakra
 } from "@chakra-ui/react";
+
+const BoxStyled = chakra(Box, {
+  
+})
 
 export default function ChakraPlayground() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box p={8}>
+      <Box>
+
+      </Box>
+
       <VStack spacing={6} align="stretch">
         <Heading>Chakra UI Playground</Heading>
 
@@ -29,8 +38,8 @@ export default function ChakraPlayground() {
           <CardBody>
             <HStack>
               <Text>Переключить тему:</Text>
-              <Switch 
-                isChecked={colorMode === 'dark'} 
+              <Switch
+                isChecked={colorMode === 'dark'}
                 onChange={toggleColorMode}
               />
             </HStack>
@@ -39,7 +48,7 @@ export default function ChakraPlayground() {
 
         <Box>
           <Heading size="md" mb={4}>Примеры компонентов</Heading>
-          
+
           <VStack spacing={4} align="stretch">
             <HStack spacing={2}>
               <Badge>Default</Badge>
@@ -62,6 +71,8 @@ export default function ChakraPlayground() {
             </HStack>
           </VStack>
         </Box>
+
+
       </VStack>
     </Box>
   );

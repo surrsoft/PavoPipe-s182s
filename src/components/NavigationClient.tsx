@@ -3,6 +3,7 @@
 import { Box, Flex, Link, Heading, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ColorModeButton } from '@/components/ui/color-mode';
 
 export const NavigationClient = () => {
   const pathname = usePathname();
@@ -18,7 +19,7 @@ export const NavigationClient = () => {
           </Link>
         </Heading>
         
-        <Flex gap={6}>
+        <Flex gap={6} align="center">
           <Menu>
             <MenuButton as={Button} variant="ghost" color="white" _hover={{ color: 'blue.300' }}>
               Страницы
@@ -38,6 +39,7 @@ export const NavigationClient = () => {
               </MenuItem>
             </MenuList>
           </Menu>
+          <ColorModeButton color="white" _hover={{ color: 'blue.300' }} />
         </Flex>
       </Flex>
     </Box>
